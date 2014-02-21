@@ -2,7 +2,7 @@
 
 Minor utilities for text processing in Brazilian Portuguese.
 
-I'm going to add new functions as I need them. Currently it has only variations of a word at one and two edit distances.
+I'm going to add new functions as I need them. Currently it has only variations of a word at one and two **edit distances** (Reference: http://norvig.com/spell-correct.html).
 
 The code is kinda slow, but I'm not worried about speed (yet).
 

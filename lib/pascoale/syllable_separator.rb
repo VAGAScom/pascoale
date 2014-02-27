@@ -16,7 +16,7 @@ module Pascoale
       rest = @word
       result = []
       while rest && rest.size > 0
-        if rest =~ /^(#{KERNEL})(?:(#{KERNEL})|(#{CODA})(#{KERNEL})|(#{CODA}#{CODA})(#{KERNEL})|(#{CODA})|(#{CODA}#{CODA}))?(.*)$/
+        if rest =~ /^(#{KERNEL})(?:(#{KERNEL})|(#{CODA})(#{KERNEL})|(#{CODA}#{CODA})(#{KERNEL})|(#{CODA}#{CODA})|(#{CODA}))?(.*)$/
           result << $1 + $3.to_s + $5.to_s + $7.to_s + $8.to_s
           rest = $2.to_s + $4.to_s + $6.to_s + $9.to_s
         else

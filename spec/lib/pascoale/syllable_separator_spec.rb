@@ -46,7 +46,11 @@ describe Pascoale::SyllableSeparator do
 
   it 'keeps long codas' do
     expect('transpiração').to separate_as %w(trans pi ra ção)
+    expect('transatlântico').to separate_as %w(tran sa tlân ti co)
     expect('mirins').to separate_as %w(mi rins)
+    expect('transerrano').to separate_as %w(tran ser ra no)
+    # Yes! It's a real word o_O
+    expect('falansterialismo').to separate_as %w(fa lans te ri a lis mo)
   end
 
   it 'separates single vowels at beggining' do

@@ -1,5 +1,5 @@
 class Pascoale::Edits
-  LETTERS = ' abcdefghijklmnopqrstuvwxyzáéíóúâêôãõç'.scan(/./)
+  LETTERS = [' '] + Pascoale::Constants::LETTERS.scan(/./)
 
   def initialize(word)
     @splits = (0..(word.size)).map do |i|

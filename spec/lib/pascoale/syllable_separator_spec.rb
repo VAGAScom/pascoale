@@ -30,6 +30,25 @@ describe Pascoale::SyllableSeparator do
     expect('carrasco').to separate_as %w(car ras co)
   end
 
+  it 'handles double consonants border cases' do
+    expect('destravar').to separate_as %w(des tra var)
+    expect('desencontro').to separate_as %w(de sen con tro)
+    expect('exaltar').to separate_as %w(e xal tar)
+    expect('excomungar').to separate_as %w(ex co mun gar)
+  end
+
+  it 'keeps "oclusivas" and "fricativas" together with "r" or "l"' do
+    expect('brasa').to separate_as %w(bra sa)
+    expect('agrupado').to separate_as %w(a gru pa do)
+    expect('fragrância').to separate_as %w(fra grân ci a)
+    expect('protocriogênico').to separate_as %w(pro to cri o gê ni co)
+  end
+
+  it 'keeps long codas' do
+    expect('transpiração').to separate_as %w(trans pi ra ção)
+    expect('mirins').to separate_as %w(mi rins)
+  end
+
   it 'separates single vowels at beggining' do
     expect('abacaxi').to separate_as %w(a ba ca xi)
     expect('exceto').to separate_as %w(ex ce to)
@@ -44,8 +63,27 @@ describe Pascoale::SyllableSeparator do
     expect('exceção').to separate_as %w(ex ce ção)
   end
 
+  it 'handle "tritongos"' do
+    expect('ideia').to separate_as %w(i dei a)
+    expect('tireoide').to separate_as %w(ti re oi de)
+  end
+
   it 'separates "hiatos"' do
     expect('moeda').to separate_as %w(mo e da)
-    expect('coxego').to separate_as %w(co xe go)
+    expect('leal').to separate_as %w(le al)
+    expect('aéreo').to separate_as %w(a é re o)
+    expect('pior').to separate_as %w(pi or)
+    expect('raíz').to separate_as %w(ra íz)
+    expect('ruído').to separate_as %w(ru í do)
+  end
+
+  it 'keeps "sineréses" together'
+  it 'separates "dieréses"'
+  it 'keeps the first consonant of the word together'
+
+  it 'separates random words' do
+    expect('acidentariamente').to separate_as %w(a ci den ta ri a men te)
+    expect('cooperar').to separate_as %w(co o pe rar)
+    #expect('abrupto').to separate_as %w(a brup to)
   end
 end

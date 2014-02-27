@@ -73,6 +73,9 @@ describe Pascoale::SyllableSeparator do
   it 'handle "tritongos"' do
     expect('ideia').to separate_as %w(i dei a)
     expect('tireoide').to separate_as %w(ti re oi de)
+    expect('praia').to separate_as %w(prai a)
+    expect('feio').to separate_as %w(fei o)
+    expect('vaia').to separate_as %w(vai a)
   end
 
   it 'separates "hiatos"' do
@@ -107,6 +110,9 @@ describe Pascoale::SyllableSeparator do
     expect('abstraído').to separate_as %w(abs tra í do)
     expect('abstenção').to separate_as %w(abs ten ção)
     expect('colapso').to separate_as %w(co lap so)
+    expect('tuiuiú').to separate_as %w(tui ui ú)
+    expect('piauí').to separate_as %w(pi au í)
+    expect('aguei').to separate_as %w(a guei)
 
     # I really don't buy the whole "comes from latin" thing.
     # Our separation if phonetic based, so, keep it that way!

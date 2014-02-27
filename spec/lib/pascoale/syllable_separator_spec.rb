@@ -49,6 +49,9 @@ describe Pascoale::SyllableSeparator do
     expect('transatlântico').to separate_as %w(tran sa tlân ti co)
     expect('mirins').to separate_as %w(mi rins)
     expect('transerrano').to separate_as %w(tran ser ra no)
+    expect('solstício').to separate_as %w(sols tí ci o)
+    expect('perspectiva').to separate_as %w(pers pec ti va)
+    expect('substância').to separate_as %w(subs tân ci a)
     # Yes! It's a real word o_O
     expect('falansterialismo').to separate_as %w(fa lans te ri a lis mo)
   end
@@ -81,13 +84,36 @@ describe Pascoale::SyllableSeparator do
     expect('ruído').to separate_as %w(ru í do)
   end
 
+  it 'keeps the first consonant of the word together' do
+    expect('pneu').to separate_as %w(pneu)
+    expect('apneia').to separate_as %w(ap nei a)
+    expect('pneumático').to separate_as %w(pneu má ti co)
+    expect('piropneumático').to separate_as %w(pi rop neu má ti co)
+    expect('mnemônica').to separate_as %w(mne mô ni ca)
+    expect('pseudônimo').to separate_as %w(pseu dô ni mo)
+    expect('gnomo').to separate_as %w(gno mo)
+  end
+
   it 'keeps "sineréses" together'
-  it 'separates "dieréses"'
-  it 'keeps the first consonant of the word together'
+
+  it 'separates "dieréses"' do
+    pending "Not yet implemented. It's being REALLY hard to create an algorithm for that >_<"
+    expect('construir').to separate_as %w(cons tru ir)
+  end
 
   it 'separates random words' do
     expect('acidentariamente').to separate_as %w(a ci den ta ri a men te)
     expect('cooperar').to separate_as %w(co o pe rar)
-    #expect('abrupto').to separate_as %w(a brup to)
+    expect('abstraído').to separate_as %w(abs tra í do)
+    expect('abstenção').to separate_as %w(abs ten ção)
+    expect('colapso').to separate_as %w(co lap so)
+
+    # I really don't buy the whole "comes from latin" thing.
+    # Our separation if phonetic based, so, keep it that way!
+    expect('abrupto').to separate_as %w(a brup to)
+    expect('abruptamente').to separate_as %w(a brup ta men te)
+    # For example, the word bellow is correctly separated
+    # (as the dictionary says). =\
+    expect('abrupção').to separate_as %w(a brup ção)
   end
 end

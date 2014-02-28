@@ -3,7 +3,7 @@ module Pascoale
     include Constants
 
     ONSET = "(?:ch|lh|nh|gu|qu|[pbtdcgfv][lr]|[#{CONSONANTS}]|[#{CONSONANTS}])"
-    NUCLEUS = "(?:ão|õe|u(?!>i)|[#{VOWELS}][#{SEMIVOWELS}]?)"
+    NUCLEUS = "(?:ão|õe|[#{VOWELS}][#{SEMIVOWELS}]?)"
     CODA = "[#{CONSONANTS}]"
 
     KERNEL = "#{ONSET}?#{NUCLEUS}"

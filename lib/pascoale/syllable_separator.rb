@@ -3,7 +3,7 @@ module Pascoale
     include Constants
 
     ONSET = "(?:ch|lh|nh|gu|qu|[pbtdcgfv][lr]|[#{CONSONANTS}]|[#{CONSONANTS}])"
-    NUCLEUS = "(?:ão|õe|[#{VOWELS}][#{SEMIVOWELS}]?)"
+    NUCLEUS = "(?:ão|õe|u(?!>i)|[#{VOWELS}][#{SEMIVOWELS}]?)"
     CODA = "[#{CONSONANTS}]"
 
     KERNEL = "#{ONSET}?#{NUCLEUS}"
@@ -19,17 +19,15 @@ module Pascoale
         if rest =~ /^(#{KERNEL})(?:(#{KERNEL})|(#{CODA})(#{KERNEL})|(#{CODA}#{CODA})(#{KERNEL})|(#{CODA}#{CODA})|(#{CODA}))?(.*)$/
           result << $1 + $3.to_s + $5.to_s + $7.to_s + $8.to_s
           rest = $2.to_s + $4.to_s + $6.to_s + $9.to_s
-        else
           # Special case! Hate them :(
           # Pneu, Gnomo, Mnemônica, Pseudônimo
-          if result.size == 0
-            if rest =~ /^([#{CONSONANTS}]#{KERNEL})(?:(#{KERNEL})|(#{CODA})(#{KERNEL})|(#{CODA}#{CODA})(#{KERNEL})|(#{CODA}#{CODA})|(#{CODA}))?(.*)$/
-              result << $1 + $3.to_s + $5.to_s + $7.to_s + $8.to_s
-              rest = $2.to_s + $4.to_s + $6.to_s + $9.to_s
-            end
-          else
-            raise %(Cannot separate "#{@word}". No rule match next syllable at "#{result.join('')}|>#{rest}")
+        elsif result.size == 0
+          if rest =~ /^([#{CONSONANTS}]#{KERNEL})(?:(#{KERNEL})|(#{CODA})(#{KERNEL})|(#{CODA}#{CODA})(#{KERNEL})|(#{CODA}#{CODA})|(#{CODA}))?(.*)$/
+            result << $1 + $3.to_s + $5.to_s + $7.to_s + $8.to_s
+            rest = $2.to_s + $4.to_s + $6.to_s + $9.to_s
           end
+        else
+          raise %(Cannot separate "#{@word}". No rule match next syllable at "#{result.join('')}|>#{rest}")
         end
       end
       result

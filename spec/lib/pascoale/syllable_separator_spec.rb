@@ -97,11 +97,22 @@ describe Pascoale::SyllableSeparator do
     expect('gnomo').to separate_as %w(gno mo)
   end
 
-  it 'keeps "sineréses" together'
+  it 'keeps "sineréses" together' do
+    expect('saudade').to separate_as %w(sau da de)
+    expect('vaidade').to separate_as %w(vai da de)
+    expect('suave').to separate_as %w(su a ve)
+  end
 
   it 'separates "dieréses"' do
-    pending "Not yet implemented. It's being REALLY hard to create an algorithm for that >_<"
     expect('construir').to separate_as %w(cons tru ir)
+    expect('acuidade').to separate_as %w(a cu i da de)
+    expect('ajuizar').to separate_as %w(a ju i zar)
+    expect('alauita').to separate_as %w(a lau i ta)
+
+    expect('toluico').to separate_as %w(to lui co)
+    expect('conluiador').to separate_as %w(con lui a dor)
+    expect('conluio').to separate_as %w(con lui o)
+    expect('aleluia').to separate_as %w(a le lui a)
   end
 
   it 'separates random words' do
@@ -113,6 +124,8 @@ describe Pascoale::SyllableSeparator do
     expect('tuiuiú').to separate_as %w(tui ui ú)
     expect('piauí').to separate_as %w(pi au í)
     expect('aguei').to separate_as %w(a guei)
+    expect('compreender').to separate_as %w(com pre en der)
+    expect('caatinga').to separate_as %w(ca a tin ga)
 
     # I really don't buy the whole "comes from latin" thing.
     # Our separation if phonetic based, so, keep it that way!

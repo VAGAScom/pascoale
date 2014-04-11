@@ -1,8 +1,8 @@
 module Pascoale
   module Constants
-    VOWELS = 'aeiouáéíóúâêôãõ'
+    VOWELS = 'aeiouáéíóúâêôãõày'
     SEMIVOWELS = 'iu'
-    CONSONANTS = 'bcdfghjklmnpqrstvwxyzç'
+    CONSONANTS = 'bcdfghjklmnpqrstvwxzç'
     LETTERS = VOWELS + CONSONANTS
   end
 end

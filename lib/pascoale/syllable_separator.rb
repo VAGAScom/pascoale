@@ -2,7 +2,7 @@ module Pascoale
   class SyllableSeparator
     include Constants
 
-    ONSET = "(?:ch|lh|nh|gu|qu|[pbtdcgfv][lr]|[#{CONSONANTS}]|[#{CONSONANTS}])"
+    ONSET = "(?:ch|lh|nh|gu|qu|[pbtdcgfv][lr]|[#{CONSONANTS}])"
     NUCLEUS = "(?:ão|õe|[#{VOWELS}][#{SEMIVOWELS}]?)"
     CODA = "[#{CONSONANTS}]"
 

@@ -48,8 +48,21 @@ Syllabic separation
 require 'pascoale'
 
 separator = Pascoale::SyllableSeparator.new('exceção')
+puts separator.separated.inspect # ["ex", "ce", "cão"]
 
-puts separator.separated.inspect
+separator = Pascoale::SyllableSeparator.new('aéreo')
+puts separator.separated.inspect # ["a", "é", "re", "o"]
+
+separator = Pascoale::SyllableSeparator.new('apneia')
+puts separator.separated.inspect # ["ap", "nei", "a"]
+
+separator = Pascoale::SyllableSeparator.new('construir')
+puts separator.separated.inspect # ["cons", "tru", "ir"]
+
+# Known error :( :( :(
+separator = Pascoale::SyllableSeparator.new('traidor')
+puts separator.separated.inspect # ["tra", "i", "dor"] should be ["trai", "dor"]
+
 ```
 
 ## Contributing

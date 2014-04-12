@@ -1,10 +1,16 @@
 # Pascoale
 
-Minor utilities for text processing in Brazilian Portuguese.
+Minor utilities for text processing in **Brazilian Portuguese**.
 
-I'm going to add new functions as I need them. Currently it has only variations of a word at one and two **edit distances** (Reference: http://norvig.com/spell-correct.html).
+I'm going to add new functions as I need them.
+
+Currently it has:
+- variations of a word at one and two **edit distances** (Reference: http://norvig.com/spell-correct.html).
+- Syllabic separation. My tests against a corpus of ~170K words shows 99.36% of correctness \o/.
 
 The code is kinda slow, but I'm not worried about speed (yet).
+
+The name of the gem is a homage to "Prof. Pasquale Cipro Neto" (http://pt.wikipedia.org/wiki/Pasquale\_Cipro\_Neto), a great teacher! And yes, the name of the gem is wrong spelled as a joke ^_^
 
 ## Installation
 
@@ -27,15 +33,24 @@ Variations of a word (typos and misspelling)
 ```ruby
 require 'pascoale'
 
-edits = Pascoale.Edits.new('você')
+edits = Pascoale::Edits.new('você')
 
 # 1 edit distance
 puts edits.editions.inspect
 
 # 2 edits distance
-puts edits.editions2.inspect # LOTS of output, be aware.
+puts edits.editions2.inspect # LOTS of output, beware.
 ```
 
+Syllabic separation
+
+```ruby
+require 'pascoale'
+
+separator = Pascoale::SyllableSeparator.new('exceção')
+
+puts separator.separated.inspect
+```
 
 ## Contributing
 

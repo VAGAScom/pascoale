@@ -10,7 +10,7 @@ Currently it has:
 
 The code is kinda slow, but I'm not worried about speed (yet).
 
-The name of the gem is a homage to "Prof. Pasquale Cipro Neto" (http://pt.wikipedia.org/wiki/Pasquale\_Cipro\_Neto), a great teacher! And yes, the name of the gem is wrong spelled as a joke ^_^
+The name of the gem is a homage to "Prof. Pasquale Cipro Neto" (http://pt.wikipedia.org/wiki/Pasquale_Cipro_Neto), a great teacher! And yes, the name of the gem is wrong spelled as a joke ^_^
 
 ## Installation
 
@@ -48,7 +48,7 @@ Syllabic separation
 require 'pascoale'
 
 separator = Pascoale::SyllableSeparator.new('exceção')
-puts separator.separated.inspect # ["ex", "ce", "cão"]
+puts separator.separated.inspect # ["ex", "ce", "ção"]
 
 separator = Pascoale::SyllableSeparator.new('aéreo')
 puts separator.separated.inspect # ["a", "é", "re", "o"]

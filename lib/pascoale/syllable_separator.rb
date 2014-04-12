@@ -3,9 +3,17 @@ module Pascoale
     include Constants
 
     ONSET = "(?:ch|lh|nh|gu|qu|[pbtdcgfv][lr]|[#{CONSONANTS}])"
-    NUCLEUS = "(?:ão|õe|[#{VOWELS}][#{SEMIVOWELS}]?)"
+
+    # Still in doubt if we should add suffixes to the "i" semivowel...
+    # it slightly improves the the matches, but some of them causes more
+    # noise than fix things =\
+    #NUCLEUS = "(?:ãe|ão|õe|[#{VOWELS}](?:u|i(?!nh|r$|m$|dora?$|ção$|dade$))?)"
+    NUCLEUS = "(?:ãe|ão|õe|[#{VOWELS}](?:u|i(?!nh|r$|m$|ção$|dora?$))?)"
+
     CODA = "[#{CONSONANTS}]"
 
+    # The concept of "rhyme" does not help in this algorithm. It seems the
+    # concept makes no sense for syllable separation in portuguese
     KERNEL = "#{ONSET}?#{NUCLEUS}"
 
     def initialize(word)

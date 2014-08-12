@@ -5,8 +5,10 @@ Minor utilities for text processing in **Brazilian Portuguese**.
 I'm going to add new functions as I need them.
 
 Currently it has:
-- variations of a word at one and two **edit distances** (Reference: http://norvig.com/spell-correct.html).
-- Syllabic separation. My tests against a corpus of ~170K words shows 99.36% of correctness \o/.
+- Simple formatting considering accents in portuguese (upcase, downcase, capitalize);
+- Title formatting, considering prepositions and other others downcase;
+- Variations of a word at one and two **edit distances** (Reference: http://norvig.com/spell-correct.html);
+- Heuristic syllabic separation. My tests against a corpus of ~170K words shows 99.36% of correctness \o/.
 
 The code is kinda slow, but I'm not worried about speed (yet).
 
@@ -28,6 +30,27 @@ Or install it yourself as:
 
 ## Usage
 
+Text formatter
+
+```ruby
+require 'pascoale'
+
+text = Pascoale::Formatter.new('Isso é um teste de formatação')
+
+# Basic formatting
+puts text.upcase # => ISSO É UM TESTE DE FORMATAÇÃO
+puts text.downcase # => isso é um teste de formatação
+puts text.capitalize # => Isso é um teste de formatação
+
+# Fancy formatting (good for titles)
+puts text.as_title # => Isso É um Teste de Formatação
+
+# Predicates
+puts text.upcase.upcase? # => true
+puts text.upcase.downcase? # => false
+puts text.capitalize? # => true
+```
+
 Variations of a word (typos and misspelling)
 
 ```ruby
@@ -48,20 +71,20 @@ Syllabic separation
 require 'pascoale'
 
 separator = Pascoale::SyllableSeparator.new('exceção')
-puts separator.separated.inspect # ["ex", "ce", "ção"]
+puts separator.separated.inspect # => ["ex", "ce", "ção"]
 
 separator = Pascoale::SyllableSeparator.new('aéreo')
-puts separator.separated.inspect # ["a", "é", "re", "o"]
+puts separator.separated.inspect # => ["a", "é", "re", "o"]
 
 separator = Pascoale::SyllableSeparator.new('apneia')
-puts separator.separated.inspect # ["ap", "nei", "a"]
+puts separator.separated.inspect # => ["ap", "nei", "a"]
 
 separator = Pascoale::SyllableSeparator.new('construir')
-puts separator.separated.inspect # ["cons", "tru", "ir"]
+puts separator.separated.inspect # => ["cons", "tru", "ir"]
 
 # Known error :( :( :(
 separator = Pascoale::SyllableSeparator.new('traidor')
-puts separator.separated.inspect # ["tra", "i", "dor"] should be ["trai", "dor"]
+puts separator.separated.inspect # => ["tra", "i", "dor"] should be ["trai", "dor"]
 
 ```
 

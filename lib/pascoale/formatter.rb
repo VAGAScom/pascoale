@@ -1,14 +1,15 @@
 module Pascoale
   class Formatter
-    EXCEPTIONS = %(a o e da do de na no em as os das dos nas nos à com sem)
+    EXCEPTIONS = %(a o e da do de na no em as os das dos nas nos à com sem ao)
 
-    def initialize(text)
+    def initialize(text, force_downcase: EXCEPTIONS)
       @text = text
+      @force_downcase = force_downcase
     end
 
     def as_title
       def title_word(a_word)
-        if EXCEPTIONS.include?(a_word.downcase)
+        if @force_downcase.include?(a_word.downcase)
           a_word.downcase
         else
           a_word.capitalize

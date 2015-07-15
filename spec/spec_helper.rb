@@ -1,1 +1,3 @@
 require 'pascoale'
+
+include Pascoale

@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec::Matchers.define :separate_as do |expected|
   result = nil
   match do |actual|
-    result = Pascoale::SyllableSeparator.new(actual).separated
+    result = SyllableSeparator.new(actual).separated
     result == expected
   end
   failure_message do |actual|
@@ -11,7 +11,7 @@ RSpec::Matchers.define :separate_as do |expected|
   end
 end
 
-describe Pascoale::SyllableSeparator do
+describe SyllableSeparator do
   it 'separates simple words' do
     expect('bola').to separate_as %w(bo la)
     expect('batata').to separate_as %w(ba ta ta)

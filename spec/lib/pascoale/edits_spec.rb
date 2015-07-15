@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Pascoale::Edits do
-  let(:edits) { Pascoale::Edits.new('test') }
+describe Edits do
+  let(:edits) { Edits.new('test') }
 
   it 'deletes letters' do
     expect(edits.deletions).to include('est', 'tst', 'tet', 'tes')

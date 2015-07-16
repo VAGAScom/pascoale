@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-RSpec::Matchers.define :separate_as do |expected|
-  result = nil
-  match do |actual|
-    result = SyllableSeparator.new(actual).separated
-    result == expected
-  end
-  failure_message do |actual|
-    %( expected "#{actual}" to separate as "#{expected}", but was "#{result}")
-  end
-end
-
 describe SyllableSeparator do
+  matcher :separate_as do |expected|
+    result = nil
+    match do |actual|
+      result = SyllableSeparator.new(actual).separated
+      result == expected
+    end
+    failure_message do |actual|
+      %( expected "#{actual}" to separate as "#{expected}", but was "#{result}")
+    end
+  end
+
   it 'separates simple words' do
     expect('bola').to separate_as %w(bo la)
     expect('batata').to separate_as %w(ba ta ta)

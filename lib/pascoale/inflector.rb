@@ -1,5 +1,7 @@
 module Pascoale
   class Inflector
+    include Constants
+
     RULES = [
         # Exceções
         ['qualquer', 'quaisquer'],
@@ -45,21 +47,21 @@ module Pascoale
         ['cônsul', 'cônsules'],
         ['gol', 'gols'],
         # L rules (too many accents :p)
-        [/([#{Constants::ACCENTED}].*)[#{Constants::ES}]l$/, '\1eis'],
-        [/[#{Constants::ES}]l$/, 'éis'],
-        [/([#{Constants::ACCENTED}].*)[#{Constants::IS}]l$/, '\1eis'],
-        [/[#{Constants::IS}]l$/, 'is'],
-        [/([#{Constants::ACCENTED}].*)[#{Constants::OS}]l$/, '\1ois'],
-        [/[#{Constants::OS}]l$/, 'óis'],
-        [/([#{Constants::VOWELS}])l$/, '\1is'],
+        [/([#{ACCENTED}].*)[#{ES}]l$/, '\1eis'],
+        [/[#{ES}]l$/, 'éis'],
+        [/([#{ACCENTED}].*)[#{IS}]l$/, '\1eis'],
+        [/[#{IS}]l$/, 'is'],
+        [/([#{ACCENTED}].*)[#{OS}]l$/, '\1ois'],
+        [/[#{OS}]l$/, 'óis'],
+        [/([#{VOWELS}])l$/, '\1is'],
         # General rules
         [/ão$/, 'ões'],
-        [/^(.*zinho)$/, ->(match) { m = match.sub(/zinho$/, ''); Inflector.new(m).pluralize.sub(/s$/, '').tr(Constants::ACCENTED, Constants::NOT_ACCENTED) + 'zinhos'}],
-        [/^(.*zinha)$/, ->(match) { m = match.sub(/zinha$/, ''); Inflector.new(m).pluralize.sub(/s$/, '').tr(Constants::ACCENTED, Constants::NOT_ACCENTED) + 'zinhas'}],
-        [/^.*n$/, ->(match) { match.tr(Constants::ACCENTED, Constants::NOT_ACCENTED) + 's' }],
+        [/^(.*zinho)$/, ->(match) { m = match.sub(/zinho$/, ''); Inflector.new(m).pluralize.sub(/s$/, '').tr(ACCENTED, NOT_ACCENTED) + 'zinhos'}],
+        [/^(.*zinha)$/, ->(match) { m = match.sub(/zinha$/, ''); Inflector.new(m).pluralize.sub(/s$/, '').tr(ACCENTED, NOT_ACCENTED) + 'zinhas'}],
+        [/^.*n$/, ->(match) { match.tr(ACCENTED, NOT_ACCENTED) + 's' }],
         [/(m)$/, 'ns'],
         [/([rz])$/, '\1es'],
-        [/([#{Constants::VOWELS}])$/, '\1s']
+        [/([#{VOWELS}])$/, '\1s']
     ]
 
     def initialize(text)

@@ -4,7 +4,7 @@ describe SyllableSeparator do
   matcher :separate_as do |expected|
     result = nil
     match do |actual|
-      result = SyllableSeparator.new(actual).separated
+      result = SyllableSeparator.new(actual).separate
       result == expected
     end
     failure_message do |actual|
@@ -56,7 +56,7 @@ describe SyllableSeparator do
     expect('falansterialismo').to separate_as %w(fa lans te ri a lis mo)
   end
 
-  it 'separates single vowels at beggining' do
+  it 'separates single vowels at beginning' do
     expect('abacaxi').to separate_as %w(a ba ca xi)
     expect('exceto').to separate_as %w(ex ce to)
     expect('arrocho').to separate_as %w(ar ro cho)
@@ -94,6 +94,7 @@ describe SyllableSeparator do
     expect('piropneumático').to separate_as %w(pi rop neu má ti co)
     expect('mnemônica').to separate_as %w(mne mô ni ca)
     expect('pseudônimo').to separate_as %w(pseu dô ni mo)
+    expect('psicólogo').to separate_as %w(psi có lo go)
     expect('gnomo').to separate_as %w(gno mo)
   end
 
@@ -101,9 +102,6 @@ describe SyllableSeparator do
     expect('saudade').to separate_as %w(sau da de)
     expect('vaidade').to separate_as %w(vai da de)
     expect('suave').to separate_as %w(su a ve)
-
-    # Not sure how to deal with these
-    #expect('traidor').to separate_as %w(trai dor)
   end
 
   it 'separates "dieréses"' do
@@ -120,9 +118,6 @@ describe SyllableSeparator do
     expect('construir').to separate_as %w(cons tru ir)
     expect('destruir').to separate_as %w(des tru ir)
     expect('destruição').to separate_as %w(des tru i ção)
-
-    #expect('acuidade').to separate_as %w(a cu i da de)
-    #expect('ajuizar').to separate_as %w(a ju i zar)
   end
 
   it 'separates random words' do
@@ -146,5 +141,73 @@ describe SyllableSeparator do
     # For example, the word bellow is correctly separated
     # (as the dictionary says). =\
     expect('abrupção').to separate_as %w(a brup ção)
+
+    expect('pais').to separate_as %w(pais)
+    expect('país').to separate_as %w(pa ís)
+  end
+
+  it 'separates "amanhã"' do
+    expect('amanhã').to separate_as %w(a ma nhã)
+  end
+
+
+  it 'separates "ainda"' do
+    expect('ainda').to separate_as %w(a in da)
+  end
+
+  it 'separates "ruim"' do
+    expect('ruim').to separate_as %w(ru im)
+  end
+
+  it 'separates "acuidade" and "ajuizar"' do
+    expect('acuidade').to separate_as %w(a cu i da de)
+    expect('ajuizar').to separate_as %w(a ju i zar)
+  end
+
+  it 'separates "traidor"' do
+    expect('traidor').to separate_as %w(trai dor)
+  end
+
+  it 'separates "arruinar"' do
+    expect('arruinar').to separate_as %w(ar ru i nar)
+  end
+
+  it 'separates "ou"' do
+    expect('cenoura').to separate_as %w(ce nou ra)
+    expect('roupa').to separate_as %w(rou pa)
+  end
+
+  it 'separates "moinho"' do
+    expect('moinho').to separate_as %w(mo i nho)
+  end
+
+  it 'separates "fluido"' do
+    expect('fluido').to separate_as %w(flu i do)
+  end
+
+  it 'separates "cair"' do
+    expect('cair').to separate_as %w(ca ir)
+  end
+
+  it 'separates "saudade" and "saudoso"' do
+    expect('saudade').to separate_as %w(sau da de)
+    expect('saudoso').to separate_as %w(sau do so)
+  end
+
+  it 'separates "rein..." and "reim..."' do
+    expect('reimplantar').to separate_as %w(re im plan tar)
+    expect('reinventar').to separate_as %w(re in ven tar)
+    expect('reincidência').to separate_as %w(re in ci dên ci a)
+    expect('deixar').to separate_as %w(dei xar)
+    expect('pereira').to separate_as %w(pe rei ra)
+  end
+
+  it 'separates "transeunte"' do
+    expect('transeunte').to separate_as %w(tran se un te)
+  end
+
+  it 'separates "doido"' do
+    expect('doído').to separate_as %w(do í do)
+    expect('doido').to separate_as %w(doi do)
   end
 end

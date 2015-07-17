@@ -10,7 +10,7 @@ begin
       begin
         word, _, separation = eval(line)
         next if word =~ /\-/
-        s = Pascoale::SyllableSeparator.new(word).separated
+        s = Pascoale::SyllableSeparator.new(word).separate
         if s == separation
           correct_counter += 1
         else

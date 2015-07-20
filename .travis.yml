@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.2.1
+install:
+  - gem install bundler -v '~> 1.9' && bundle install
+deploy:
+  provider: rubygems
+  api_key:
+    secure: MU7uLfXgToLsBwVVY6yWDVEwziQhGou7tTDFe5Wj21djanGNzj9KG12MyQgwiTzm6J2PKzu9aIKRh6EtBWZF69XxeLuUrdGeq/sqDoCXUenyysKhJMwGMQRzwCdO8JigzNOKpnVX7+FpPwap+6RmoKQze6ZZ3GG0zuOKLHyiI4Q=
+  gem: pascoale
+  on:
+    tags: true
+    repo: VAGAScom/pascoale

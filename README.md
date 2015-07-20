@@ -5,12 +5,12 @@ Minor utilities for text processing in **Brazilian Portuguese**.
 I'm going to add new functions as I need them.
 
 Currently it has:
+- Pluralization and singularization (>= v0.3.0);
+- Proparoxytone, paroxytone and oxytone detection (>= v0.3.0); 
 - Simple formatting considering accents in portuguese (upcase, downcase, capitalize);
 - Title formatting, considering prepositions and other others downcase;
 - Variations of a word at one and two **edit distances** (Reference: http://norvig.com/spell-correct.html);
-- Heuristic syllabic separation. My tests against a corpus of ~170K words shows 99.36% of correctness \o/.
-
-The code is kinda slow, but I'm not worried about speed (yet).
+- Heuristic syllabic separation. My tests against a corpus of ~170K words shows 99.36% of correctness (improved to ~99.56% on v0.3.0).
 
 The name of the gem is a homage to "Prof. Pasquale Cipro Neto" (http://pt.wikipedia.org/wiki/Pasquale_Cipro_Neto), a great teacher! And yes, the name of the gem is wrong spelled as a joke ^_^
 
@@ -29,6 +29,51 @@ Or install it yourself as:
     $ gem install pascoale
 
 ## Usage
+
+Pluralization and singularization
+
+*(Lowercase only)
+
+
+```ruby
+require 'pascoale'
+
+capt = Pascoale::Inflector.new('capitão')
+puts capt.pluralize # => capitães
+
+capts = Pascoale::Inflector.new('capitães')
+puts capts.singularize # => capitão
+
+captn = Pascoale::Inflector.new('capitãozinho')
+puts captn.singularize # => capitãezinhos
+
+qq = Pascoale::Inflector.new('qualquer')
+puts qq.singularize # => quaisquer
+```
+
+Proparoxytones, Paroxytones and Oxytones
+
+*(Lowercase only)
+
+```ruby
+require 'pascoale'
+
+diox = Pascoale::Reflector.new('dióxido')
+puts diox.proparoxytone? # => true
+puts diox.paroxytone?    # => false
+puts diox.oxytone?       # => false
+
+ideia = Pascoale::Reflector.new('ideia')
+puts ideia.proparoxytone? # => false
+puts ideia.paroxytone?    # => true
+puts ideia.oxytone?       # => false
+
+parati = Pascoale::Reflector.new('parati')
+puts parati.proparoxytone? # => false
+puts parati.paroxytone?    # => false
+puts parati.oxytone?       # => true
+```
+
 
 Text formatter
 
@@ -66,6 +111,7 @@ puts edits.editions2.inspect # LOTS of output, beware.
 ```
 
 Syllabic separation
+*(Lowercase only)
 
 ```ruby
 require 'pascoale'
@@ -81,11 +127,6 @@ puts separator.separated.inspect # => ["ap", "nei", "a"]
 
 separator = Pascoale::SyllableSeparator.new('construir')
 puts separator.separated.inspect # => ["cons", "tru", "ir"]
-
-# Known error :( :( :(
-separator = Pascoale::SyllableSeparator.new('traidor')
-puts separator.separated.inspect # => ["tra", "i", "dor"] should be ["trai", "dor"]
-
 ```
 
 ## Contributing

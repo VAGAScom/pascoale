@@ -8,9 +8,9 @@ Currently it has:
 - Pluralization and singularization (>= v0.3.0);
 - Proparoxytone, paroxytone and oxytone detection (>= v0.3.0); 
 - Simple formatting considering accents in portuguese (upcase, downcase, capitalize);
-- Title formatting, considering prepositions and other others downcase;
+- Title formatting, considering prepositions;
 - Variations of a word at one and two **edit distances** (Reference: http://norvig.com/spell-correct.html);
-- Heuristic syllabic separation. My tests against a corpus of ~170K words shows 99.36% of correctness (improved to ~99.56% on v0.3.0).
+- Heuristic syllabic separation. My tests against a corpus of ~170K words shows 99.36% correctness (improved to ~99.56% on v0.3.0).
 
 The name of the gem is a homage to "Prof. Pasquale Cipro Neto" (http://pt.wikipedia.org/wiki/Pasquale_Cipro_Neto), a great teacher! And yes, the name of the gem is wrong spelled as a joke ^_^
 

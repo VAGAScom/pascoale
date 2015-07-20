@@ -1,6 +1,6 @@
 module Pascoale
   class Formatter
-    EXCEPTIONS = %(a o e da do de na no em as os das dos nas nos à com sem ao)
+    EXCEPTIONS = %w(a o e da do de na no em as os das dos nas nos à com sem ao)
 
     def initialize(text, force_downcase: EXCEPTIONS)
       @text = text

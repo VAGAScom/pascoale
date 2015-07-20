@@ -15,13 +15,10 @@ module Pascoale
 
     # Most common case in portuguese
     def paroxytone?
-      return false if proparoxytone?
-      return false if oxytone?
-      #syllables = SyllableSeparator.new(@text).separate
-      #return true if syllables[-2] =~ /[#{ACCENTED}]/
-      true
+      !proparoxytone? && !oxytone?
     end
 
+    # Accends or specific terminators
     def oxytone?
       syllables = SyllableSeparator.new(@text).separate
       return true if syllables.size == 1

@@ -2,7 +2,7 @@ module Pascoale
   class Inflector
     include Constants
 
-    RULES = [
+    PLURAL_RULES = [
         # Exceções
         ['qualquer', 'quaisquer'],
         ['avô', 'avós'],
@@ -64,27 +64,76 @@ module Pascoale
         [/([#{VOWELS}])$/, '\1s']
     ]
 
+    SINGULAR_RULES =[
+        # Exceptions
+        ['papeizinhos', 'papelzinho'],
+        ['avós', 'avô'],
+        ['quaisquer', 'qualquer'],
+        ['raízes', 'raiz'],
+        ['juniores', 'júnior'],
+        ['seniores', 'sênior'],
+        ['caracteres', 'caráter'],
+        ['males', 'mal'],
+        ['cônsules', 'cônsul'],
+        # NS to N, not M
+        ['abdomens', 'abdômen'],
+        ['germens', 'gérmen'],
+        ['hifens', 'hífen'],
+        ['liquens', 'líquen'],
+        # S exceptions - no flex
+        ['pires', 'pires'],
+        ['vírus', 'vírus'],
+        ['atlas', 'atlas'],
+        ['lápis', 'lápis'],
+        ['ônibus', 'ônibus'],
+        # S exceptions - accent change
+        ['gases', 'gás'],
+        ['meses', 'mês'],
+        # S general rule
+        [/ses$/, 's'],
+        # L general rules
+        [/áveis$/, 'ável'], # No good >_<, too specific
+        [/éis$/, 'el'],
+        [/óis$/, 'ol'],
+        [/eis$/, 'il'],
+        [/([aou])is$/, '\1l'],
+        # General rules
+        [/^(.*zinhos)$/, ->(match) { m = match.sub(/zinhos$/, ''); Inflector.new(m + 's').singularize + 'zinho'}],
+        [/^(.*zinhas)$/, ->(match) { m = match.sub(/zinhas$/, ''); Inflector.new(m + 's').singularize + 'zinha'}],
+        [/is$/, 'il'],
+        [/res$/, 'r'],
+        [/zes$/, 'z'],
+        [/ns$/, 'm'],
+        [/ães$/, 'ão'],
+        [/ões$/, 'ão'],
+        [/s$/, '']
+    ]
+
     def initialize(text)
       @text = text
     end
 
     def pluralize
-      @pluralized ||= plural(@text)
+      @pluralized ||= apply_rules_to(@text, PLURAL_RULES)
+    end
+
+    def singularize
+      @singularized ||= apply_rules_to(@text, SINGULAR_RULES)
     end
 
     private
-    def plural(text)
-      pluralized = text.dup
-      RULES.each do |regex, replace|
+    def apply_rules_to(text, rules)
+      rslt = text.dup
+      rules.each do |regex, replace|
         reg = Regexp === regex ? regex : /^#{regex}$/
         case replace
           when Proc
-            return pluralized if pluralized.sub!(reg, &replace)
+            return rslt if rslt.sub!(reg, &replace)
           else
-            return pluralized if pluralized.sub!(reg, replace)
+            return rslt if rslt.sub!(reg, replace)
         end
       end
-      pluralized
+      rslt
     end
   end
 end

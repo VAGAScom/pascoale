@@ -35,6 +35,9 @@ describe Reflector do
       expect(Reflector.new('ruim')).to be_oxytone
       expect(Reflector.new('condor')).to be_oxytone
       expect(Reflector.new('anzol')).to be_oxytone
+      expect(Reflector.new('variável')).not_to be_oxytone
+      expect(Reflector.new('prováveis')).not_to be_oxytone
+      expect(Reflector.new('ámavel')).not_to be_oxytone
     end
   end
 
